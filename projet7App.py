@@ -80,7 +80,7 @@ def local_features_importance(sample_client:Client):
                                                 feature_names=X_train.columns.values,
                                                 class_names =['Non_defaulter_0','Defaulter_1'],
                                                 mode="classification",
-                                                verbose=False,
+                                                verbose=True,
                                                 random_state=10)
     client_index = sample_client.dict()
     num=int(client_index['index'])
