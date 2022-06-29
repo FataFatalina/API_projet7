@@ -6,3 +6,5 @@ uvicorn
 gunicorn
 sklearn
 lime
+numpy
+matplotlib
