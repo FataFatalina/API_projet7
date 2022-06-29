@@ -35,14 +35,6 @@ y_y_test=y_test[0:100]['TARGET']
 x_train=X_train.iloc[0:300]
 y_y_train=y_train[0:300]['TARGET']
 
-
-explainer = lime_tabular.LimeTabularExplainer(training_data =X_train.values,
-                                                feature_names=X_train.columns.values,
-                                                class_names =['Non_defaulter_0','Defaulter_1'],
-                                                mode="classification",
-                                                verbose=False,
-                                                random_state=10)
-
 @app.post('/predict') # l'URL de l'appi 
 def predict_score(sample_client:Client):
     data = sample_client.dict()
@@ -84,7 +76,12 @@ def feature_importance():
 
 @app.post('/local_features_importance')
 def local_features_importance(sample_client:Client):
-    print('received request' + str(sample_client))
+    explainer = lime_tabular.LimeTabularExplainer(training_data =X_train.values,
+                                                feature_names=X_train.columns.values,
+                                                class_names =['Non_defaulter_0','Defaulter_1'],
+                                                mode="classification",
+                                                verbose=False,
+                                                random_state=10)
     client_index = sample_client.dict()
     num=int(client_index['index'])
     test_sample=x_test.iloc[num,:]
